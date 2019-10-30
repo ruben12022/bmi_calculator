@@ -37,7 +37,7 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.purple,
+                      color: Color(0xff323244),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     margin: EdgeInsets.all(15.0),
@@ -46,7 +46,7 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.purple,
+                      color: Color(0xff323244),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     margin: EdgeInsets.all(15.0),
@@ -58,7 +58,7 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.purple,
+                color: Color(0xff323244),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               margin: EdgeInsets.all(15.0),
@@ -70,7 +70,7 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.purple,
+                      color: Color(0xff323244),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     margin: EdgeInsets.all(15.0),
@@ -79,7 +79,7 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.purple,
+                      color: Color(0xff323244),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     margin: EdgeInsets.all(15.0),
