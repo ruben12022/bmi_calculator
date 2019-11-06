@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_card.dart';
+import 'icon_content.dart';
+import 'constants.dart';
 
-void main() => runApp(BMICalculator());
-
-class BMICalculator extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          primaryColor: Colors.black,
-          scaffoldBackgroundColor: Colors.black,
-          accentColor: Colors.purple,
-          textTheme: TextTheme(body1: TextStyle(color: Colors.white))),
-      home: InputPage(),
-    );
-  }
-}
+enum Gender { male, female }
+Gender gender;
 
 class InputPage extends StatefulWidget {
   @override
@@ -22,6 +13,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender selectedGender;
+  int height = 180, weight = 70, age = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,59 +28,93 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff323244),
-                      borderRadius: BorderRadius.circular(10.0),
+                  child: ReusableCard(
+                    color: (selectedGender == Gender.male)
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    onPressed: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    cardChild: new CardSex(
+                      iconGenre: FontAwesomeIcons.mars,
+                      nameGenre: 'MALE',
                     ),
-                    margin: EdgeInsets.all(15.0),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff323244),
-                      borderRadius: BorderRadius.circular(10.0),
+                  child: new ReusableCard(
+                    color: (selectedGender == Gender.female)
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    onPressed: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    cardChild: CardSex(
+                      iconGenre: FontAwesomeIcons.venus,
+                      nameGenre: 'FEMALE',
                     ),
-                    margin: EdgeInsets.all(15.0),
                   ),
                 )
               ],
             ),
           ),
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xff323244),
-                borderRadius: BorderRadius.circular(10.0),
+            child: ReusableCard(
+              color: kActiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'HEIGHT',
+                    style: kLabelStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        '$height',
+                        style: kNumberStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 120.0,
+                    max: 220.0,
+                    activeColor: Color(0xffeb1555),
+                    inactiveColor: Color(0xff808b88),
+                    onChanged: (newValue) {
+                      setState(() {
+                        height = newValue.round();
+                      });
+                    },
+                  ),
+                ],
               ),
-              margin: EdgeInsets.all(15.0),
             ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
+                Expanded(child: new ReusableCard(color: kActiveCardColor)),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff323244),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    margin: EdgeInsets.all(15.0),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff323244),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    margin: EdgeInsets.all(15.0),
-                  ),
-                ),
+                  child: new ReusableCard(color: kActiveCardColor),
+                )
               ],
             ),
           ),
+          Container(
+            color: KcolorButton,
+            margin: EdgeInsets.only(top: 10.0),
+            width: double.infinity,
+            height: KbottomContainerHeight,
+          )
         ],
       ),
     );
