@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'constants.dart';
+import 'round_icon_button.dart';
 
 enum Gender { male, female }
 Gender gender;
@@ -39,7 +40,7 @@ class _InputPageState extends State<InputPage> {
                     },
                     cardChild: new CardSex(
                       iconGenre: FontAwesomeIcons.mars,
-                      nameGenre: 'MALE',
+                      nameGenre: 'HOMBRE',
                     ),
                   ),
                 ),
@@ -55,7 +56,7 @@ class _InputPageState extends State<InputPage> {
                     },
                     cardChild: CardSex(
                       iconGenre: FontAwesomeIcons.venus,
-                      nameGenre: 'FEMALE',
+                      nameGenre: 'MUJER',
                     ),
                   ),
                 )
@@ -69,7 +70,7 @@ class _InputPageState extends State<InputPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'HEIGHT',
+                    'ALTURA',
                     style: kLabelStyle,
                   ),
                   Row(
@@ -83,6 +84,17 @@ class _InputPageState extends State<InputPage> {
                       ),
                     ],
                   ),
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                    thumbShape:
+                    RoundSliderThumbShape(enabledThumbRadius: 15),
+                    overlayShape:
+                    RoundSliderOverlayShape(overlayRadius: 30),
+                    activeTrackColor: Colors.white,
+                    inactiveTrackColor: Color(0xff8d8e98),
+                    thumbColor: Color(0xffeb1555),
+                    overlayColor: Color(0x29eb1555)),
+                  child:
                   Slider(
                     value: height.toDouble(),
                     min: 120.0,
@@ -95,6 +107,7 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                   ),
+                ),
                 ],
               ),
             ),
@@ -102,9 +115,91 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child: new ReusableCard(color: kActiveCardColor)),
                 Expanded(
-                  child: new ReusableCard(color: kActiveCardColor),
+                    child: new ReusableCard(color: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'PESO',
+                          style: kLabelStyle,
+                        ),
+                        Text(
+                          '$weight',
+                          style: kNumberStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: Icons.remove ,
+                              onPressed: (){
+                                setState(() {
+                                 if (weight > 20 ) {
+                                   weight--;
+                                 }
+                                });
+                              }
+                            ),
+                            RoundIconButton(
+                              icon:Icons.add,
+                                onPressed: (){
+                                  setState(() {
+                                    if (weight < 160 ) {
+                                      weight++;
+                                    }
+                                  });
+                                }
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    )
+
+                ),
+                Expanded(
+                  child: new ReusableCard(color: kActiveCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'EDAD',
+                        style: kLabelStyle,
+                      ),
+                      Text(
+                        '$age',
+                        style: kNumberStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                         children: <Widget>[
+                           RoundIconButton(
+                               icon: Icons.remove ,
+                               onPressed: (){
+                                 setState(() {
+                                   if (age > 10 ) {
+                                     age--;
+                                   }
+                                 });
+                               }
+                           ),
+                           RoundIconButton(
+                               icon:Icons.add,
+                               onPressed: (){
+                                 setState(() {
+                                   if (age < 100 ) {
+                                     age++;
+                                   }
+                                 });
+                               }
+                           )
+                         ],
+                      ),
+                    ],
+                  ),
+
+                  ),
                 )
               ],
             ),
@@ -114,9 +209,16 @@ class _InputPageState extends State<InputPage> {
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: KbottomContainerHeight,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+
+              ],
+            ),
           )
         ],
       ),
     );
   }
 }
+
